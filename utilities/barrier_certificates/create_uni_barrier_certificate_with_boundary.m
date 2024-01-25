@@ -58,9 +58,9 @@ function [ uni_barrier_certificate ] = create_uni_barrier_certificate_with_bound
     boundary_points = parser.Results.BoundaryPoints;
     
     %Check given boundary points
-    assert(length(boundary_points)==4, "Boundary points must represent a rectangle.")
-    assert(boundary_points(2) > boundary_points(1), "Difference between x coordinates of defined rectangular boundary points must be positive.")
-    assert(boundary_points(4) > boundary_points(3), "Difference between y coordinates of defined rectangular boundary points must be positive.")
+    assert(length(boundary_points)==4, 'Boundary points must represent a rectangle.')
+    assert(boundary_points(2) > boundary_points(1), 'Difference between x coordinates of defined rectangular boundary points must be positive.')
+    assert(boundary_points(4) > boundary_points(3), 'Difference between y coordinates of defined rectangular boundary points must be positive.')
      
     D = [wheel_radius/2, wheel_radius/2; -wheel_radius/base_length, wheel_radius/base_length];
     L = [1,0;0,projection_distance] * D;

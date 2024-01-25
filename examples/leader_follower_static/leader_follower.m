@@ -10,7 +10,8 @@ iterations = 5000;
 %% Set up the Robotarium object
 
 N = 4;
-initial_positions = generate_initial_conditions(N, 'Width', 1, 'Height', 1, 'Spacing', 0.5);
+% initial_positions = generate_initial_conditions(N, 'Width', 1, 'Height', 1, 'Spacing', 0.5);
+initial_positions = [0 0.5000 0.5000 0; 0.5000 0.5000 0 0; -2.5495 0.6190 -0.1827 1.2312];
 r = Robotarium('NumberOfRobots', N, 'ShowFigure', true, 'InitialConditions', initial_positions);
 
 %% Create the desired Laplacian
@@ -41,7 +42,8 @@ uni_barrier_cert = create_uni_barrier_certificate_with_boundary();
 % Single-integrator position controller
 leader_controller = create_si_position_controller('XVelocityGain', 0.8, 'YVelocityGain', 0.8, 'VelocityMagnitudeLimit', 0.1);
 
-waypoints = [-1 0.8; -1 -0.8; 1 -0.8; 1 0.8]';
+% waypoints = [-1 0.8; -1 -0.8; 1 -0.8; 1 0.8]';
+waypoints = [-1 -0.7; 1 -0.7; 0 0.7]';
 close_enough = 0.05;
 
 for t = 1:iterations
@@ -83,13 +85,14 @@ for t = 1:iterations
         case 3
             dxi(:, 1) = leader_controller(x(1:2, 1), waypoint);
             if(norm(x(1:2, 1) - waypoint) < close_enough)
-                state = 4;
+%                 state = 1;
+                break;
             end
-        case 4
-            dxi(:, 1) = leader_controller(x(1:2, 1), waypoint);
-            if(norm(x(1:2, 1) - waypoint) < close_enough)
-                state = 1;
-            end
+%         case 4
+%             dxi(:, 1) = leader_controller(x(1:2, 1), waypoint);
+%             if(norm(x(1:2, 1) - waypoint) < close_enough)
+%                 state = 1;
+%             end
     end
     
         
